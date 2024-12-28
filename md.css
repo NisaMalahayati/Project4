@@ -1,0 +1,835 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Header styles */
+
+header {
+    background-color: #000000;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    position: relative;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ff004f;
+    text-decoration: underline;
+}
+
+/* Hamburger Menu Icon */
+.hamburger-icon {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger-icon .bar {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+    header {
+        padding: 20px 30px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        display: none;
+        width: 100%;
+        background-color: #000000;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 20px 0;
+    }
+
+    nav a {
+        font-size: 1rem;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hamburger-icon {
+        display: flex;
+    }
+
+    nav.open {
+        display: flex;
+    }
+
+    /* Adjust the artists grid for smaller screens */
+    .artists-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Hero section styles */
+.hero {
+    height: 90vh;
+    background: url('yg-hero.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect */
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    animation: fadeInDown 2s ease;
+}
+
+/* Content section styles */
+.content {
+    background-color: #ffffff;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+    }
+
+    /* Adjust hero section for mobile */
+    .hero {
+        height: 80vh;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    /* Adjust content section padding for smaller screens */
+    .content {
+        padding: 20px;
+    }
+}
+
+/* Media query for very small screens (e.g., portrait mobile) */
+@media (max-width: 375px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .logo {
+        font-size: 0.9rem;
+    }
+
+    nav {
+        gap: 8px;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    /* Adjust content section padding for smaller screens */
+    .content {
+        padding: 15px;
+    }
+}
+
+
+.about-stats {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow flex items to wrap when necessary */
+    width: 80%; /* Adjust width to take up more space */
+    margin: 0 auto; /* Center the stats block */
+    padding: 40px 0; /* Padding for spacing */
+}
+
+.stat {
+    text-align: center;
+    flex: 1 1 22%; /* Make each stat take up 22% of the available space, but flexible */
+    margin: 10px; /* Space between each stat */
+    display: flex; /* Make number and label align horizontally */
+    flex-direction: column; /* Stack number and label vertically */
+    align-items: center; /* Align items in the center */
+    justify-content: center; /* Ensure both items stay centered */
+    position: relative;
+    white-space: nowrap; /* Prevent text from wrapping */
+    animation: scrollText 10s linear infinite; /* Apply scrolling animation */
+    min-width: 150px; /* Prevent shrinking too much */
+    padding: 10px 0; /* Add padding to prevent text touching the edges */
+}
+/* Style for the number and label to keep size consistent */
+.stat .number {
+    font-size: 2rem; /* Consistent size for the number */
+    font-weight: bold;
+    color: #ff8c00;
+    margin-bottom: 5px; /* Space between number and label */
+}
+
+.stat .label {
+    font-size: 1rem; /* Consistent size for the label */
+    color: #777;
+    display: inline-block; /* Ensures number and label stay together */
+    line-height: 1.4; /* Adjust line height for better spacing between lines */
+}
+
+/* Create the scrolling animation */
+@keyframes scrollText {
+    0% {
+        transform: translateX(100%); /* Start from the right */
+    }
+    100% {
+        transform: translateX(-100%); /* Move to the left */
+    }
+}
+
+/* Responsif: Tampilan Berdampingan */
+@media (min-width: 769px) {  /* Layar tablet dan lebih besar */
+    .about-stats {
+        flex-wrap: nowrap;  /* Jangan biarkan item membungkus ke baris baru */
+        justify-content: space-between;
+    }
+
+    .stat {
+        flex: 1 1 22%; /* Pastikan setiap elemen mengambil 22% dari lebar kontainer */
+        min-width: 150px; /* Tidak lebih kecil dari ini */
+    }
+
+    /* Tetap menjaga ukuran font untuk elemen number dan label */
+    .stat .number {
+        font-size: 2rem;
+    }
+
+    .stat .label {
+        font-size: 1rem;
+    }
+}
+
+/* Responsif: Tampilan Vertikal pada Layar Sempit */
+@media (max-width: 768px) { /* Layar lebih kecil (seperti mobile) */
+    .about-stats {
+        flex-direction: column;  /* Ubah menjadi kolom jika lebar layar kecil */
+        align-items: center;     /* Posisikan stat secara vertikal */
+        width: 100%;             /* Pastikan lebar 100% */
+    }
+
+    .stat {
+        flex: 1 1 100%; /* Setiap stat mengambil 100% lebar layar */
+        min-width: 100%; /* Pastikan tidak ada yang lebih sempit */
+        margin: 10px 0; /* Beri jarak vertikal antar stat */
+    }
+
+    /* Tetap menjaga ukuran font untuk elemen number dan label */
+    .stat .number {
+        font-size: 2rem;
+    }
+
+    .stat .label {
+        font-size: 1rem;
+    }
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000000;
+    color: #fff;
+}
+
+/* Album Section */
+.album-section {
+    background: linear-gradient(to bottom, #000000, #212020dc);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.album-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.album-header p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #b3b3b3;
+}
+
+.album-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.album-card {
+    background: #1f1f1f;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 250px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.album-card:hover {
+    transform: scale(1.05);
+}
+
+.album-cover {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.icon-cassette {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: #1db954;
+    animation: spin 4s linear infinite;
+    opacity: 0.9;
+}
+
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.album-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.album-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.album-info p {
+    font-size: 1rem;
+    color: #b3b3b3;
+}
+
+/* Section for Artists Grid */
+.section {
+    color: #1db954;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2e2b2cb0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Grid Layout for Artist Cards */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.artist-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.artist-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.artist-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.artist-card img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+/* Cassette Effect on Artist Card */
+.artist-card::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: url('kaset.png') no-repeat center center;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    animation: rotate-cassette 2s linear infinite;
+}
+
+@keyframes rotate-cassette {
+    0% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+    100% {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
+
+/* Media Queries for Responsiveness */
+
+/* For Tablets (768px and below) */
+@media (max-width: 768px) {
+    .album-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .album-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    .album-header h2 {
+        font-size: 2rem;
+    }
+
+    .album-header p {
+        font-size: 1rem;
+    }
+
+    .artists-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .artist-card img {
+        height: 250px;
+    }
+}
+
+/* For Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .album-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .album-header p {
+        font-size: 0.9rem;
+    }
+
+    .album-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .album-card {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .artist-card {
+        width: 100%;
+        max-width: 90%;
+    }
+
+    .artist-card img {
+        height: 200px;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* For Very Small Devices (375px and below) */
+@media (max-width: 375px) {
+    .album-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .album-header p {
+        font-size: 0.85rem;
+    }
+
+    .album-card {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .artist-card img {
+        height: 180px;
+    }
+
+    .section h2 {
+        font-size: 1.6rem;
+    }
+}
+#tour-fanmeet {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fbf05b8b;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+#tour-fanmeet h2 {
+    text-align: center;
+    margin: 30px 0;
+    font-size: 2rem;
+    color: #000000;
+}
+
+.slider-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    width: 100%;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 20px;
+}
+
+.slide h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.datetime, .place, .description {
+    font-size: 1rem;
+    color: #666;
+    margin: 10px 0;
+}
+
+@media screen and (max-width: 768px) {
+    #tour-fanmeet {
+        width: 95%;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .slide h3 {
+        font-size: 1.25rem;
+    }
+
+    .datetime, .place, .description {
+        font-size: 0.9rem;
+    }
+}
+
+/* Section About Us */
+.about-us {
+    margin: 50px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-us h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.about-us p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.about-us-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.about-us-info .team-image img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-info .mission, .about-us-info .vision {
+    flex: 1;
+}
+
+.about-us-info h3 {
+    font-size: 1.8rem;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.about-us-info p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.about-us-info .mission p,
+.about-us-info .vision p {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .about-us-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-us-info .team-image img {
+        max-width: 80%;
+    }
+}
+
+/* Hover animasi untuk seluruh section */
+/* .section:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease-in-out;
+} */
+
+footer {
+    background: #111;
+    padding: 40px;
+    color: #ddd;
+    border-top: 1px solid #444;
+}
+
+/* Footer Container with Flexbox */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Contact Us Section */
+.contact-us {
+    flex: 1;
+    max-width: 30%;
+}
+
+.contact-us h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #ff004f;
+}
+
+.contact-us p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.contact-us a {
+    color: #ff004f;
+    text-decoration: none;
+}
+
+.contact-us a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Links and Text */
+.footer-main {
+    flex: 2;
+    text-align: center;
+}
+
+.footer-links {
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ff004f;
+}
+
+.footer-main p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+/* Responsive Styles for Footer */
+@media screen and (max-width: 1024px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-us,
+    .footer-main {
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .contact-us {
+        order: 1; /* Ensures Contact Us section comes before footer links on smaller screens */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        padding: 20px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .contact-us h3 {
+        font-size: 1rem;
+    }
+
+    .footer-links a {
+        font-size: 0.8rem;
+    }
+
+    .footer-main p {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    footer {
+        padding: 15px;
+    }
+
+    .contact-us h3 {
+        font-size: 1rem;
+    }
+
+    .footer-links a {
+        font-size: 0.8rem;
+        margin: 0 5px;
+    }
+
+    .footer-main p {
+        font-size: 0.8rem;
+    }
+}
