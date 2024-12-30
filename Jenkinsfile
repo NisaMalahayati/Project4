@@ -2,33 +2,30 @@ pipeline {
     agent any
 
     environment {
-        BUILD_DIR = 'MD Entertainment'  
+        BUILD_DIR = 'Project4'
+        SSH_CREDENTIALS_ID = 'GitHub_SSH_Key'  
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Mengambil kode dari GitHub
-                git 'https://github.com/NisaMalahayati/Project4.git'
+                // Mengambil kode dari GitHub menggunakan SSH
+                git branch: 'main', url: 'git@github.com:NisaMalahayati/Project4.git', credentialsId: SSH_CREDENTIALS_ID
             }
         }
 
         stage('Build') {
             steps {
-                // kalau punya proses build (misalnya kompilasi CSS atau JavaScript),
-                // bisa tambahkan di sini.
-                // Namun, kalau hanya file statis, stage ini bisa dilewati.
                 echo 'No build step required for static site'
             }
         }
 
         stage('Deploy') {
             steps {
-                // Proses deploy ( meng-upload ke server)
                 script {
                     sh '''
-                    #  menggunakan rsync untuk meng-upload ke server
-                    rsync -avz $BUILD_DIR/ username@server:/path/to/deploy/
+                    # Menggunakan rsync untuk deploy ke server
+                    rsync -avz $BUILD_DIR/ user@server:/path/to/deploy/
                     '''
                 }
             }
