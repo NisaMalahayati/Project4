@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Mengambil kode dari GitHub menggunakan SSH
-                git branch: 'main', url: 'git@github.com:NisaMalahayati/Project4.git', credentialsId: SSH_CREDENTIALS_ID
+                git branch: 'main', url: 'git@github.com:NisaMalahayati/Project4.git', credentialsId: 228b473c-7c98-46ca-8446-079a0c4bad75
             }
         }
 
