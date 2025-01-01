@@ -60,7 +60,7 @@ pipeline {
                 echo 'Deploying application...'
                 script {
                     bat """
-                    "${GIT_BASH_PATH}" -c "docker run -d -p 8083:80 nisa329/my-static-site"
+                    "${GIT_BASH_PATH}" -c "docker run -d -p 8084:80 nisa329/my-static-site"
                     """
                 }
             }
