@@ -47,8 +47,8 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_HUB_CREDENTIALS_USR', passwordVariable: 'DOCKER_HUB_CREDENTIALS_PSW')]) {
                         bat """
-                        "${GIT_BASH_PATH}" -c "echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin"
-                        "${GIT_BASH_PATH}" -c "docker push nisa329/my-static-site"
+                        echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin
+                        docker push nisa329/my-static-site
                         """
                     }
                 }
@@ -60,7 +60,7 @@ pipeline {
                 echo 'Deploying application...'
                 script {
                     bat """
-                    "${GIT_BASH_PATH}" -c "docker run -d -p 8084:80 nisa329/my-static-site"
+                    "${GIT_BASH_PATH}" -c "docker run -d -p 8085:80 nisa329/my-static-site"
                     """
                 }
             }
