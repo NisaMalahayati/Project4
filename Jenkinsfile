@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        GIT_BASH_PATH = 'C:\\Program Files\\Git\\bin\\bash.exe' // Ganti dengan path Git Bash di sistemmu
+        GIT_BASH_PATH = 'C:\\Program Files\\Git\\bin\\bash.exe' // mengganti dengan path Git Bash di sistem
+        DOCKER_HUB_CREDENTIALS = credentials('dockerhub-credentials') // 
     }
 
     stages {
@@ -30,11 +31,11 @@ pipeline {
             steps {
                 echo 'Pushing image to Docker Hub...'
                 script {
-                    withDockerRegistry([credentialsId: 'dockerhub-credentials', url: '']) {
-                        bat """
-                        "${GIT_BASH_PATH}" -c "docker push nisa329/my-static-site"
-                        """
-                    }
+                    // Login ke Docker Hub
+                    bat """
+                    "${GIT_BASH_PATH}" -c "echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin"
+                    "${GIT_BASH_PATH}" -c "docker push nisa329/my-static-site"
+                    """
                 }
             }
         }
