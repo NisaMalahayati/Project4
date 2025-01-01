@@ -6,16 +6,30 @@ pipeline {
     }
 
     stages {
+        stage('Check Docker') {
+            steps {
+                script {
+                    def dockerPath = bat(script: 'echo %PATH%', returnStdout: true).trim()
+                    echo "PATH is: ${dockerPath}"
+                }
+            }
+        }
+        
         stage('Build') {
             steps {
                 echo 'Building the project...'
                 script {
-                    bat """
-                    "${GIT_BASH_PATH}" -c "docker build -t nisa329/my-static-site ."
-                    """
+                    try {
+                        bat """
+                        "${GIT_BASH_PATH}" -c "docker build -t nisa329/my-static-site ."
+                        """
+                    } catch (Exception e) {
+                        echo "Error: ${e.getMessage()}"
+                    }
                 }
             }
         }
+
         stage('Test') {
             steps {
                 echo 'Running tests...'
@@ -26,11 +40,11 @@ pipeline {
                 }
             }
         }
+
         stage('Push to Docker Hub') {
             steps {
                 echo 'Pushing image to Docker Hub...'
                 script {
-             
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_HUB_CREDENTIALS_USR', passwordVariable: 'DOCKER_HUB_CREDENTIALS_PSW')]) {
                         bat """
                         "${GIT_BASH_PATH}" -c "echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin"
@@ -40,6 +54,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
